@@ -19,35 +19,29 @@ It includes a modern frontend using TailwindCSS and displays the video thumbnail
 
 ## 🛠 How to Run Locally
 
-### 1. Get the Project
+
+**### 1. Get the Project**
 
 You can either **download** the project manually or **clone it** using Git:
 
 #### 📦 Option A – Download as ZIP
-
-1. Go to the repo: https://github.com/tahmid03/youtubesummarizer
-2. Click the green **Code** button and choose **Download ZIP**
-3. Extract the ZIP file
+1. Go to the repo: https://github.com/tahmid03/youtubesummarizer  
+2. Click the green **Code** button and choose **Download ZIP**  
+3. Extract the ZIP file  
 4. Open a terminal inside the extracted folder
 
-#### 🧪 Option B – Clone using Git 
-
-```bash
+#### 🧪 Option B – Clone using Git (recommended)
 git clone https://github.com/tahmid03/youtubesummarizer.git
 cd youtubesummarizer
 
-**### 2. Create a Virtual Environment**
+### 2. Create a Virtual Environment
 
 This sets up an isolated Python environment for the project.
 
-```bash
 python -m venv venv
 
-**### 3. Activate the Virtual Environment**
+### 3. Activate the Virtual Environment
 
-This activates your local Python environment so installed packages stay project-specific.
-
-```bash
 # Windows CMD
 venv\Scripts\activate
 
@@ -57,9 +51,86 @@ venv\Scripts\activate
 # macOS/Linux
 source venv/bin/activate
 
-**### 4. Install the Requirements**
+### 4. Install the Requirements
 
 Install all the Python packages the project depends on.
-
-```bash
 pip install -r requirements.txt
+
+### 5. Create Your .env File
+
+This file securely stores your OpenAI API key locally.
+
+In the root folder of your project, create a file named .env
+
+Inside the file, paste your OpenAI key like this:
+
+OPENAI_API_KEY=your-real-openai-key-here
+🔑 You can get your API key at: https://platform.openai.com/account/api-keys
+
+### 6. Run the App
+
+Start the Flask development server.
+
+python app.py
+You should see:
+ * Running on http://127.0.0.1:5000/
+
+ * ### 7. Open the App in Your Browser
+
+Go to:
+http://127.0.0.1:5000/
+
+
+
+
+
+
+
+## 🧰 Troubleshooting
+
+**❌ ModuleNotFoundError: No module named 'flask'**
+
+You probably forgot to install the required packages.
+
+pip install -r requirements.txt
+Or install Flask directly:
+pip install flask
+
+❌ ModuleNotFoundError: No module named 'dotenv'
+
+You need to install the python-dotenv package for loading your .env file:
+pip install python-dotenv
+
+❌ ModuleNotFoundError: No module named 'openai'
+
+Install the OpenAI package:
+pip install openai
+
+❌ Error: OPENAI_API_KEY is None or missing
+
+Make sure you have created a .env file in your project root and that it contains your API key like this:
+
+OPENAI_API_KEY=sk-proj-your-openai-key
+Also double-check:
+
+That the file is named .env (not .env.txt)
+
+That you've restarted your terminal after creating the file
+
+That you've activated your virtual environment
+
+❌ Nothing happens when I run python app.py
+
+Make sure your virtual environment is activated first:
+
+# Windows
+venv\Scripts\activate
+
+# macOS/Linux
+source venv/bin/activate
+
+## 👨‍💻 Author
+
+Built with ❤️ by [Tahmid Rahman](https://github.com/tahmid03)  
+Feel free to connect with me on [LinkedIn]([https://www.linkedin.com/in/tahmid-rahman2/])
+
