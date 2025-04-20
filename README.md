@@ -30,7 +30,7 @@ You can either **download** the project manually or **clone it** using Git:
 3. Extract the ZIP file  
 4. Open a terminal inside the extracted folder
 
-#### 🧪 Option B – Clone using Git (recommended)
+#### 🧪 Option B – Clone using Git 
 git clone https://github.com/tahmid03/youtubesummarizer.git
 cd youtubesummarizer
 
