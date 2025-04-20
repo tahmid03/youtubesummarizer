@@ -57,14 +57,9 @@ Install all the Python packages the project depends on.
 pip install -r requirements.txt
 
 ### 5. Create Your .env File
+🗂️ Copy the `.env.example` file and rename the copy to `.env`, then paste your OpenAI key inside:
+OPENAI_API_KEY=sk-proj-your-real-api-key
 
-This file securely stores your OpenAI API key locally.
-
-In the root folder of your project, create a file named .env
-
-Inside the file, paste your OpenAI key like this:
-
-OPENAI_API_KEY=your-real-openai-key-here
 🔑 You can get your API key at: https://platform.openai.com/account/api-keys
 
 ### 6. Run the App
