@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Summarizer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script>
+        async function summarizeVideo() {
+            const videoUrl = document.getElementById("videoUrl").value;
+            const summaryElement = document.getElementById("summary");
+            const loadingIndicator = document.getElementById("loading");
+            const thumbnailElement = document.getElementById("thumbnail");
+            
+            summaryElement.innerText = "";  // Clear previous summary
+            loadingIndicator.style.display = "block";  // Show loading animation
+            
+            // Extract Video ID from URL
+            const videoId = videoUrl.split('v=')[1]?.split('&')[0];
+            if (videoId) {
+                thumbnailElement.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                thumbnailElement.style.display = "block";
+            }
+            
+            const response = await fetch("/summarize", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ video_url: videoUrl })
+            });
+            const result = await response.json();
+            
+            loadingIndicator.style.display = "none";  // Hide loading animation
+            summaryElement.innerText = result.summary || "Error: " + result.error;
+        }
+    </script>
+    <style>
+        body {
+            background: url('/mnt/data/A_creative_fusion_of_the_YouTube_and_OpenAI_logos.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .youtube-loader {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid red;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen">
+    <div class="w-full max-w-2xl p-6 bg-gray-800 bg-opacity-90 rounded-lg shadow-md">
+        <img src="/mnt/data/A_creative_fusion_of_the_YouTube_and_OpenAI_logos.png" alt="Logo" class="w-32 mx-auto mb-4">
+        <h2 class="text-2xl font-bold text-center mb-4">YouTube Video Summarizer</h2>
+        <div class="flex gap-2">
+            <input type="text" id="videoUrl" class="flex-1 p-2 border border-gray-600 rounded bg-gray-700 text-white" placeholder="Enter YouTube URL" />
+            <button onclick="summarizeVideo()" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-white">Summarize</button>
+        </div>
+        <div id="loading" class="flex justify-center mt-4" style="display: none;">
+            <div class="youtube-loader"></div>
+        </div>
+        <img id="thumbnail" class="w-full mt-4 rounded hidden" alt="Video Thumbnail">
+        <h3 class="text-lg font-semibold mt-6">Summary:</h3>
+        <p id="summary" class="p-3 bg-gray-700 rounded mt-2 text-sm"></p>
+    </div>
+</body>
+</html>
